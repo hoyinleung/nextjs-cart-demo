@@ -21,7 +21,7 @@ export default async function Home() {
             <React.Fragment key={product.id}>
 
               <div className="flexItem bg-slate-200 rounded-lg">
-                <Link href={'/product/' + product.id}>
+                <Link href={'/products/' + product.id}>
                   <img src={`/images/${product.image}`} alt={product.name} />
                 </Link>
 
