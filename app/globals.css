@@ -2,20 +2,93 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  body {
+    @apply m-0 p-0;
+  }
+  h1 {
+    @apply text-3xl font-bold text-center mt-12;
+  }
+  img {
+    @apply w-full h-auto rounded-lg;
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+  .container {
+    @apply mx-auto max-w-[1200px];
+  }
+  .flexContainer {
+		@apply mx-3 gap-6 inline-flex flex-wrap justify-center
+	}
+
+	.flexItem {
+		@apply my-10 px-0 basis-full md:basis-[47%] lg:basis-[31%];
+	}
+  .goodsName {
+    @apply text-2xl font-bold mx-auto mt-10;
+  }
+  .priceTag {
+    @apply text-xl font-bold mx-auto mt-10;
+  }
+  .addToCart {
+    @apply block bg-[#1c3455] text-white mx-auto rounded-xl text-xl font-bold cursor-pointer py-1 w-[90%];
+  }
+  .addMinusBtn {
+    @apply bg-[#1c3455] text-white px-4 py-1 rounded-lg text-xl font-bold cursor-pointer;
+  }
+  .backToGoodsListBtn {
+    @apply bg-[#1c3455] text-white font-bold px-40 py-12 rounded-lg mx-auto mt-40;
+  }
+  .productName {
+    @apply text-2xl font-bold mt-3 mb-5 text-center;
+  }
+  .ProductDetail {
+      @apply mx-auto mt-10 w-[1000px] text-lg font-bold;
+}
+.ProductDetail img {
+  @apply w-[350px];
+}
+.ProductDetail td {
+  @apply p-10;
+}
+.cartSection {
+  @apply w-[70%];
+}
+.checkoutTable {
+  @apply w-full text-left border-collapse;
+}
+.checkoutTable tr {
+  @apply bg-antiquewhite mx-10;
+}
+.checkoutTable td {
+  @apply p-0 text-lg;
+}
+.checkoutTable img {
+  @apply w-[150px] mx-15;
+}
+.productSubTotal {
+  @apply text-3xl font-bold mr-30;
+}
+.checkoutSection {
+  @apply w-[30%] text-lg text-center;
+}
+.checkoutSection div {
+  @apply my-20;
+}
+.checkoutSection button {
+  @apply bg-[#0d3164] text-white font-bold px-40 py-12 rounded-lg cursor-pointer;
+}
+.grandTotal {
+  @apply text-4xl font-bold;
+}
+.nothingInCart {
+  @apply text-2xl mt-40 text-center;
+}
+.freeShipping {
+  @apply font-bold text-forestgreen;
+}
+.noShipping {
+  @apply text-brown font-bold;
+}
 }
