@@ -1,13 +1,13 @@
 "use client"
 
-import { createContext, useState } from "react";
+import { createContext, useContext, useState } from "react";
 
 type CartContextType = {
   cart: CartItems[] | [],
   add1ToCart: (product: ProductDetail) => void
 };
 
-export const CartContext = createContext<CartContextType | null>(null);
+const CartContext = createContext<CartContextType | null>(null);
 
 export default function CartContextProvider({ children }: { children: React.ReactNode }) {
 
@@ -47,3 +47,11 @@ export default function CartContextProvider({ children }: { children: React.Reac
     </CartContext.Provider>
   )
 }
+
+export const useCartContext = () => {
+  const context = useContext(CartContext);
+  if (!context) {
+    throw new Error("useGlobalContext must be used within a SharedProvider");
+  }
+  return context;
+};
