@@ -4,6 +4,7 @@ import React from "react";
 import Title from "@/components/Title";
 import QuantityBtn from "@/components/QuantityBtn";
 
+
 export default async function Home() {
 
   const dataQ = await fetch('https://hoyinleung.github.io/demoapi/react-basic-product.json')
@@ -13,7 +14,8 @@ export default async function Home() {
 
   return (
     <>
-      <Title txt="NextJS Cart" />
+
+      <Title txt="NextJS Cart Demo" className="mt-0" />
 
       <div className="flexContainer">
         {
@@ -28,8 +30,10 @@ export default async function Home() {
                 <div className="productName">
                   {product.name}  -  {product.price}元/件
                 </div>
-
-                <QuantityBtn productInfo={product} />
+                
+                <div className="text-center mb-4">
+                  <QuantityBtn productInfo={product} />
+                </div>
               </div>
 
             </React.Fragment>

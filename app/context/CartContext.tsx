@@ -5,6 +5,7 @@ import { createContext, useContext, useState } from "react";
 type CartContextType = {
   cart: CartItems[] | [],
   add1ToCart: (product: ProductDetail) => void
+  minus1ToCart: (product: ProductDetail) => void
 };
 
 const CartContext = createContext<CartContextType | null>(null);
@@ -40,9 +41,33 @@ export default function CartContextProvider({ children }: { children: React.Reac
       );
     }
   };
+  const minus1ToCart = (product: ProductDetail) => {
+
+    const productIndex = cart.findIndex((cartProduct) => cartProduct.id === product.id);
+
+    if(productIndex == -1) return
+
+    if (cart[productIndex].quantity === 1) {
+      setCart((prev) => prev.filter((cartProduct) => cartProduct.id !== product.id));
+    } 
+    else {
+      setCart(
+        cart.map((cartProduct) => {
+          if (cartProduct.id === product.id) {
+            return {
+              ...cartProduct,
+              quantity: cartProduct.quantity - 1
+            }
+          }
+          return cartProduct;
+        })
+      );
+    }
+    
+  };
 
   return (
-    <CartContext.Provider value={{cart, add1ToCart}}>
+    <CartContext.Provider value={{cart, add1ToCart,minus1ToCart}}>
       {children}
     </CartContext.Provider>
   )
@@ -51,7 +76,7 @@ export default function CartContextProvider({ children }: { children: React.Reac
 export const useCartContext = () => {
   const context = useContext(CartContext);
   if (!context) {
-    throw new Error("useGlobalContext must be used within a SharedProvider");
+    throw new Error("useCartContext must be used within a SharedProvider");
   }
   return context;
 };

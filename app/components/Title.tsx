@@ -1,8 +1,10 @@
 type Props = {
-  txt:string
+  txt: string;
+  className?: string;
 }
-export default function Title({txt}:Props) {
+
+export default function Title({ txt, className }: Props) {
   return (
-      <h1>{txt}</h1>
-  )
+    <h1 className={className}>{txt}</h1>
+  );
 }

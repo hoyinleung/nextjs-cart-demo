@@ -7,10 +7,13 @@
     @apply m-0 p-0;
   }
   h1 {
-    @apply text-3xl font-bold text-center mt-12;
+    @apply text-3xl font-bold text-center py-5;
   }
   img {
     @apply w-full h-auto rounded-lg;
+  }
+  a{
+    @apply text-blue-600;
   }
 }
 
@@ -25,6 +28,9 @@
 	.flexItem {
 		@apply my-10 px-0 basis-full md:basis-[47%] lg:basis-[31%];
 	}
+	.checkoutItem {
+		@apply my-10 px-0 basis-full md:basis-[47%] lg:basis-[31%];
+	}
   .goodsName {
     @apply text-2xl font-bold mx-auto mt-10;
   }
@@ -32,10 +38,10 @@
     @apply text-xl font-bold mx-auto mt-10;
   }
   .addToCart {
-    @apply block bg-[#1c3455] text-white mx-auto rounded-xl text-xl font-bold cursor-pointer py-1 w-[90%];
+    @apply inline-block bg-[#1c3455] text-white mx-auto rounded-xl text-xl font-bold cursor-pointer py-2 w-[60%] text-center;
   }
   .addMinusBtn {
-    @apply bg-[#1c3455] text-white px-4 py-1 rounded-lg text-xl font-bold cursor-pointer;
+    @apply bg-[#4179c7] text-white px-3 py-1 rounded-lg text-xl font-bold cursor-pointer;
   }
   .backToGoodsListBtn {
     @apply bg-[#1c3455] text-white font-bold px-40 py-12 rounded-lg mx-auto mt-40;

@@ -1,30 +1,28 @@
 "use client"
 
 import { useState } from "react"
+import { useCartContext } from "@/context/CartContext"
 
 type Props = {
   productInfo: ProductDetail
 }
 
 export default function QuantityBtn({ productInfo }: Props) {
-  console.log("🚀 ~ QuantityBtn ~ productInfo:", productInfo)
 
-  /* const {cartItems, setCartItems} = useContext(CartContext)
+  const { cart, add1ToCart, minus1ToCart } = useCartContext()
 
-  let productIndexInCart = cartItems.findIndex((element)=>{
-      return element.id === productInfo.id
-  }) */
+
+  const indexInCart = cart.findIndex((element) => {
+    return element.id === productInfo.id
+  })
 
   const [numInCart, setNumInCart] = useState(
-    1
+    (indexInCart === -1) ? 0 : cart[indexInCart].quantity
   )
-  /* let [numInCart,setNumInCart] = useState(
-      (productIndexInCart===-1) ? 0 : cartItems[productIndexInCart].quantity
-  ) */
 
   const handleAdd = () => {
 
-    /* if(productIndexInCart===-1)
+    /* if(indexInCart===-1)
     {
         //購物車本身沒有，在cartItems array中加個新element (object)
         setCartItems(
@@ -43,46 +41,51 @@ export default function QuantityBtn({ productInfo }: Props) {
     {
         //購物車有該產品，只加個quantity
         let newCartArray = [...cartItems]
-        newCartArray[productIndexInCart].quantity++
+        newCartArray[indexInCart].quantity++
         setCartItems(newCartArray)
     } */
 
-    setNumInCart(numInCart + 1)
+    //setNumInCart(numInCart + 1)
+    add1ToCart(productInfo)
+    setNumInCart(prev => prev + 1)
+    console.log("🚀 ~ QuantityBtn ~ cart:", cart)
   }
 
   const handleSubtract = () => {
 
-    /* if(cartItems[productIndexInCart].quantity===1)
+    /* if(cartItems[indexInCart].quantity===1)
     {
         //購在物車中只剩一件的話，remove object
         let newCartArray = [...cartItems]
-        newCartArray.splice(productIndexInCart,1)
+        newCartArray.splice(indexInCart,1)
         setCartItems(newCartArray)
     }
     else
     {
         //只減個quantity
         let newCartArray = [...cartItems]
-        newCartArray[productIndexInCart].quantity--
+        newCartArray[indexInCart].quantity--
         setCartItems(newCartArray)
     } */
-
-    setNumInCart(numInCart - 1)
+    minus1ToCart(productInfo)
+    setNumInCart(prev => prev - 1)
+    console.log("🚀 ~ QuantityBtn ~ cart:", cart)
   }
 
   return (
-    <div className="text-center py-3">
+    <span className="min-w-[370px] text-center">
       {
         (numInCart === 0) ?
-          <div className="" onClick={handleAdd}>
-            <span className="addToCart">加入購物車</span>
-          </div> :
-          <div>
+
+            <span className="addToCart" onClick={handleAdd}>加入購物車</span>
+           :
+           <span className="addToCart">
             <span className="addMinusBtn" onClick={handleSubtract}>-</span>
-            <span className="text-xl font-bold px-2">{numInCart}</span>
+            <span className="text-xl font-bold px-2"> 購買數 : {numInCart}
+            </span>
             <span className="addMinusBtn" onClick={handleAdd}>+</span>
-          </div>
+            </span>
       }
-    </div>
+    </span>
   )
 }
