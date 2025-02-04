@@ -35,7 +35,7 @@ export default function RootLayout({
           </main>
         </CartContextProvider>
         <footer className="container text-center text-base bg-yellow-50">
-          By <Link target="_blank" href={`https://www.leunghoyin.hk`}>梁浩賢</Link>
+        NextJS Cart Demo By <Link target="_blank" href={`https://www.leunghoyin.hk`}>梁浩賢</Link>
         </footer>
       </body>
     </html>
