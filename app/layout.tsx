@@ -26,9 +26,9 @@ export default function RootLayout({
         className={`${notoSansHK.className} antialiased bg-slate-50`}
       >
         <CartContextProvider>
-          <nav className="py-5 px-4 container bg-slate-100">
-            <Link href="/" className="text-xl font-bold">Pruduct List</Link>&nbsp; | &nbsp;
-            <Link href="/checkout" className="text-xl font-bold">Checkout</Link>
+          <nav className="py-5 px-7 container bg-slate-100 flex justify-between">
+            <Link href="/" className="text-xl font-bold">產品列表</Link>
+            <Link href="/checkout" className="text-xl font-bold">💲結帳</Link>
           </nav>
           <main className="container bg-yellow-50">
             {children}
