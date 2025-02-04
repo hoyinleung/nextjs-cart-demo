@@ -6,7 +6,7 @@ export default function Checkout() {
   
   return (
     <>
-    <Title txt={`Checkout`}></Title>
+    <Title txt={`💲結帳`}></Title>
 
     <CheckoutItemList />
     </>
