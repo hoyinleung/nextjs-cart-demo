@@ -7,7 +7,7 @@ import QuantityBtn from "@/components/QuantityBtn";
 
 export default async function Home() {
 
-  const dataQ = await fetch('https://hoyinleung.github.io/demoapi/react-basic-product.json')
+  const dataQ = await fetch('http://localhost:4000/products')
   if (!dataQ.ok) throw Error('Failed to fetch posts')
 
   const productData: ProductDetail[] = await dataQ.json()
@@ -15,7 +15,7 @@ export default async function Home() {
   return (
     <>
 
-      <Title txt="NextJS Cart Demo" className="mt-0" />
+      <Title txt="NextJS水果店" className="mt-0" />
 
       <div className="flexContainer">
         {
