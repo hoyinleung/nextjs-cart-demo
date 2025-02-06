@@ -8,3 +8,8 @@ type ProductDetail = {
 type CartItems = ProductDetail & {
   quantity: number;
 }
+
+type TransactionProps = {
+	customerEmail?: string
+  productItems: CartItems[]
+}
