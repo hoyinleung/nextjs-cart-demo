@@ -5,10 +5,12 @@ import { useCartContext } from '@/context/CartContext'
 import QuantityBtn from '@/components/QuantityBtn'
 import Link from 'next/link'
 import { checkout } from '@/actions/transaction'
+import { useRouter } from 'next/navigation'
 
 export default function CheckoutItemList() {
 
   const { cart } = useCartContext()
+  const router = useRouter()
 
   const handleCheckout = async () => {
     const transaction: TransactionProps = {
@@ -21,7 +23,8 @@ export default function CheckoutItemList() {
 
     try {
         const checkoutSessionURL = await checkout(transaction) as string;
-        window.location.href = checkoutSessionURL
+        //window.location.href = checkoutSessionURL
+        router.push(checkoutSessionURL)
     } catch (error) {
         console.error('An error occurred:', error);
     }

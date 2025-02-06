@@ -48,7 +48,6 @@ export default function QuantityBtn({ productInfo }: Props) {
     //setNumInCart(numInCart + 1)
     add1ToCart(productInfo)
     setNumInCart(prev => prev + 1)
-    console.log("🚀 ~ QuantityBtn ~ cart:", cart)
   }
 
   const handleSubtract = () => {
