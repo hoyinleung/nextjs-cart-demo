@@ -4,10 +4,31 @@ import React from 'react'
 import { useCartContext } from '@/context/CartContext'
 import QuantityBtn from '@/components/QuantityBtn'
 import Link from 'next/link'
+import { checkout } from '@/actions/transaction'
+import { useRouter } from 'next/navigation'
 
 export default function CheckoutItemList() {
 
   const { cart } = useCartContext()
+  const router = useRouter()
+
+  const handleCheckout = async () => {
+    const transaction: TransactionProps = {
+      productItems : cart
+    };
+
+    /* if (customerEmail) {
+        transaction.customerEmail = customerEmail;
+    } */
+
+    try {
+        const checkoutSessionURL = await checkout(transaction) as string;
+        //window.location.href = checkoutSessionURL
+        router.push(checkoutSessionURL)
+    } catch (error) {
+        console.error('An error occurred:', error);
+    }
+};
 
   return (
     <>
@@ -61,7 +82,7 @@ export default function CheckoutItemList() {
                 ${cart.reduce((total, product) => total + product.price * product.quantity, 0).toFixed(0)}
               </div>
 
-              <button className="bg-green-600 text-xl w-[50%] py-3 text-slate-100 rounded-lg px-4 mx-auto">付款</button>
+              <button onClick={handleCheckout} className="bg-green-600 text-xl w-[50%] py-3 text-slate-100 rounded-lg px-4 mx-auto">付款</button>
             </div>
 
           </div>
