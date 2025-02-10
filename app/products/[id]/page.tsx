@@ -1,14 +1,17 @@
 import QuantityBtn from '@/components/QuantityBtn'
 import Link from 'next/link'
 import React from 'react'
+import {getById} from '@/actions/products'
 
 export default async function ProductDetail({ params }: { params: Promise<{ id: string }> }) {
 
   const productId = (await params).id
 
-  const dataQ = await fetch('http://localhost:4000/products/' + productId)
+  /* const dataQ = await fetch('http://localhost:4000/products/' + productId)
 
-  const productDetail: ProductDetail = await dataQ.json()
+  const productDetail: ProductDetail = await dataQ.json() */
+
+  const productDetail: ProductDetail = await getById(parseInt(productId, 10))
 
   return (
     <>
