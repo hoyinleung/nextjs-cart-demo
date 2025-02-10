@@ -3,14 +3,15 @@ import Link from "next/link";
 import React from "react";
 import Title from "@/components/Title";
 import QuantityBtn from "@/components/QuantityBtn";
-
+import {getAll} from '@/actions/products'
 
 export default async function Home() {
 
-  const dataQ = await fetch('http://localhost:4000/products')
+  /* const dataQ = await fetch('http://localhost:4000/products')
   if (!dataQ.ok) throw Error('Failed to fetch posts')
 
-  const productData: ProductDetail[] = await dataQ.json()
+  const productData: ProductDetail[] = await dataQ.json() */
+  const productData: ProductDetail[] = await getAll()
 
   return (
     <>
