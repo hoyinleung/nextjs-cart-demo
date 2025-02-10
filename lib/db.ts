@@ -1,5 +1,3 @@
-// lib/mongodb.ts (or utils/mongodb.ts - choose your preferred location)
-
 import { MongoClient } from 'mongodb';
 
 const MONGODB_URI = process.env.MONGODB_URI;
@@ -17,11 +15,6 @@ if (!MONGODB_DB) {
   );
 }
 
-/**
- * Global is used here to maintain a cached connection across hot reloads
- * in development. This prevents connections growing exponentially
- * during API Route usage.
- */
 let cachedClient: MongoClient | null = null;
 let cachedDb: any = null; // Typescript doesn't have a specific type for Db in global
 
