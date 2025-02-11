@@ -10,6 +10,7 @@ import {
   SignedOut,
   UserButton
 } from '@clerk/nextjs'
+import SignInDetector from "@/components/SignInDetector";
 
 const notoSansHK = Noto_Sans_HK({
   subsets: ['latin'],
@@ -47,6 +48,7 @@ export default function RootLayout({
             <main className="container bg-yellow-50">
               {children}
             </main>
+            <SignInDetector />
           </CartContextProvider>
           <footer className="container text-center text-base bg-yellow-50">
             NextJS Cart Demo By <Link target="_blank" href={`https://www.leunghoyin.hk`}>梁浩賢</Link>

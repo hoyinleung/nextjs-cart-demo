@@ -1,11 +1,13 @@
 "use client"
 
 import { createContext, useContext, useState } from "react";
+import { updateCartToClerkPublicMetaData } from "@/actions/cart";
 
 type CartContextType = {
   cart: CartItems[] | [],
   add1ToCart: (product: ProductDetail) => void
   minus1ToCart: (product: ProductDetail) => void
+  setCart: React.Dispatch<React.SetStateAction<CartItems[] | []>>
 };
 
 const CartContext = createContext<CartContextType | null>(null);
@@ -13,61 +15,33 @@ const CartContext = createContext<CartContextType | null>(null);
 export default function CartContextProvider({ children }: { children: React.ReactNode }) {
 
   const [cart, setCart] = useState<CartItems[] | []>([])
-  const add1ToCart = (product: ProductDetail) => {
-
-    const productExistsInCart = cart.some((cartProduct) => cartProduct.id === product.id);
-
-    if (!productExistsInCart) {
-      setCart(
-        (prev) => {
-          return [
-            ...prev,
-            { ...product, quantity: 1 }
-          ]
-        }
-      );
-    }
-    else {
-      setCart(
-        cart.map((cartProduct) => {
-          if (cartProduct.id === product.id) {
-            return {
-              ...cartProduct,
-              quantity: cartProduct.quantity + 1
-            }
-          }
-          return cartProduct;
-        })
-      );
-    }
+  const updateCart = (newCart: CartItems[]) => {
+    setCart(newCart);
+    updateCartToClerkPublicMetaData(newCart); // Sync with Clerk metadata
   };
+
+  const add1ToCart = (product: ProductDetail) => {
+    updateCart(
+      cart.some((item) => item.id === product.id)
+        ? cart.map((item) =>
+          item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
+        )
+        : [...cart, { ...product, quantity: 1 }]
+    );
+  };
+
   const minus1ToCart = (product: ProductDetail) => {
-
-    const productIndex = cart.findIndex((cartProduct) => cartProduct.id === product.id);
-
-    if(productIndex == -1) return
-
-    if (cart[productIndex].quantity === 1) {
-      setCart((prev) => prev.filter((cartProduct) => cartProduct.id !== product.id));
-    } 
-    else {
-      setCart(
-        cart.map((cartProduct) => {
-          if (cartProduct.id === product.id) {
-            return {
-              ...cartProduct,
-              quantity: cartProduct.quantity - 1
-            }
-          }
-          return cartProduct;
-        })
-      );
-    }
-    
+    updateCart(
+      cart
+        .map((item) =>
+          item.id === product.id ? { ...item, quantity: item.quantity - 1 } : item
+        )
+        .filter((item) => item.quantity > 0)
+    );
   };
 
   return (
-    <CartContext.Provider value={{cart, add1ToCart,minus1ToCart}}>
+    <CartContext.Provider value={{cart, add1ToCart,minus1ToCart,setCart}}>
       {children}
     </CartContext.Provider>
   )

@@ -13,3 +13,6 @@ export const handleError = (error: unknown) => {
     throw new Error(`Unknown error: ${JSON.stringify(error)}`);
   }
 };
+export const isOjbectEmpty = (obj: any) => {
+  return Object.keys(obj).length === 0 && obj.constructor === Object;
+}
