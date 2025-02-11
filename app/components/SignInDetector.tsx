@@ -12,8 +12,13 @@ export default function SignInDetector() {
   useEffect(() => {
     if (isLoaded) {
       if (isSignedIn) {
-        console.log("User signed in");
-        setCart(user.publicMetadata.cart as any[])
+        console.log("User signed in",user);
+
+        if(user){
+          //避免Clerk過來的是Undefined
+          const newValue = user.publicMetadata?.cart as any[] || [];
+          setCart(newValue)
+        }
       }
     }
   }, [isSignedIn]);
