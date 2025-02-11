@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useCartContext } from "@/context/CartContext"
 
 type Props = {
@@ -9,10 +9,9 @@ type Props = {
 
 export default function QuantityBtn({ productInfo }: Props) {
 
-  const { cart, add1ToCart, minus1ToCart } = useCartContext()
+  const { cart,setCart, add1ToCart, minus1ToCart } = useCartContext()
 
-
-  const indexInCart = cart.findIndex((element) => {
+  const indexInCart = cart?.findIndex((element) => {
     return element.id === productInfo.id
   })
 
@@ -28,8 +27,13 @@ export default function QuantityBtn({ productInfo }: Props) {
   const handleSubtract = () => {
     minus1ToCart(productInfo)
     setNumInCart(prev => prev - 1)
-    console.log("🚀 ~ QuantityBtn ~ cart:", cart)
   }
+
+  useEffect(() => {
+    if (indexInCart !== -1) {
+      setNumInCart(cart[indexInCart]?.quantity)
+    }
+  }, [cart, setCart])
 
   return (
     <span className="min-w-[370px] text-center">
