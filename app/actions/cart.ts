@@ -1,6 +1,6 @@
 "use server"
 
-import { handleError, isOjbectEmpty } from '@/lib/util'
+import { handleError } from '@/lib/util'
 import { currentUser, clerkClient } from '@clerk/nextjs/server'
 
 export async function updateCartToClerkPublicMetaData(cart: any[]) {
