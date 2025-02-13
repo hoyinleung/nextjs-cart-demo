@@ -51,7 +51,7 @@ export default function RootLayout({
             <SignInDetector />
           </CartContextProvider>
           <footer className="container text-center text-base bg-yellow-50">
-            NextJS Cart Demo By <Link target="_blank" href={`https://www.leunghoyin.hk`}>梁浩賢</Link>
+          <Link target="_blank" href={`https://github.com/hoyinleung/nextjs-cart-demo`}>NextJS Cart Demo</Link> By <Link target="_blank" href={`https://www.leunghoyin.hk`}>梁浩賢</Link>
           </footer>
         </body>
       </html>
