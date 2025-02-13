@@ -1,6 +1,10 @@
 "use server"
 
+import connectToDatabase from "@/lib/db";
+import { handleError } from "@/lib/util";
 import Stripe from "stripe"
+
+const collection = 'order'
 
 export async function checkout(transaction: TransactionProps) {
 
@@ -39,3 +43,18 @@ export async function checkout(transaction: TransactionProps) {
     
     return session.url
 }
+export async function getAll() {
+    try {
+      const { db } = await connectToDatabase();
+      const data = await db
+      .collection(collection)
+      .find({})
+      .toArray();
+  
+      if (data) return data
+      return false
+  
+    } catch (error) {
+      handleError(error);
+    }
+  }
