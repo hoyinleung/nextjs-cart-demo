@@ -11,6 +11,7 @@ import {
   UserButton
 } from '@clerk/nextjs'
 import SignInDetector from "@/components/SignInDetector";
+import { currentUser } from "@clerk/nextjs/server";
 
 const notoSansHK = Noto_Sans_HK({
   subsets: ['latin'],
@@ -23,11 +24,14 @@ export const metadata: Metadata = {
   description: "Taught by Ho Yin Leung",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  
+  const user = await currentUser()
+  
   return (
     <ClerkProvider localization={zhTW}>
       <html lang="zh">
@@ -42,6 +46,10 @@ export default function RootLayout({
                 <Link href={`/sign-in`} className="text-xl font-bold">登入</Link>
               </SignedOut>
               <SignedIn>
+              {
+                  (user?.emailAddresses[0].emailAddress === "hello@leunghoyin.hk") && 
+                  (<Link href={`order-history`} className="text-xl font-bold">購買記錄</Link>)
+                }
                 <UserButton />
               </SignedIn>
             </nav>
@@ -51,7 +59,7 @@ export default function RootLayout({
             <SignInDetector />
           </CartContextProvider>
           <footer className="container text-center text-base bg-yellow-50">
-            NextJS Cart Demo By <Link target="_blank" href={`https://www.leunghoyin.hk`}>梁浩賢</Link>
+          <Link target="_blank" href={`https://github.com/hoyinleung/nextjs-cart-demo`}>NextJS Cart Demo</Link> By <Link target="_blank" href={`https://www.leunghoyin.hk`}>梁浩賢</Link>
           </footer>
         </body>
       </html>

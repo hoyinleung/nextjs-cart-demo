@@ -28,8 +28,9 @@ export async function POST(request: Request) {
       //metadata, 
       //payment_intent, 
       //currency, 
-      customer_details
+      customer_details,
     } = event.data.object;
+    
 
     try {
       const { db } = await connectToDatabase();
@@ -43,7 +44,8 @@ export async function POST(request: Request) {
         {
           name: customerName,
           email: customerEmail,
-          amount: amount_total
+          amount: amount_total,
+          orderedAt : new Date()
         }
       );
       console.log("🚀寫入了新Order", newOrderQ)
