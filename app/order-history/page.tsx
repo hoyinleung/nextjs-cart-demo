@@ -26,7 +26,7 @@ export default async function OrderHistory() {
                 <td className="border border-gray-200 px-4 py-2">{order.name}</td>
                 <td className="border border-gray-200 px-4 py-2">{order.email}</td>
                 <td className="border border-gray-200 px-4 py-2">${(order.amount / 100).toFixed(1)}</td>
-                <td className="border border-gray-200 px-4 py-2">{(order?.orderedAt) && order.orderedAt}</td>
+                <td className="border border-gray-200 px-4 py-2">{order.orderedAt}</td>
               </tr>
             ))}
           </tbody>

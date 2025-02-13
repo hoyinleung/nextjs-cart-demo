@@ -21,5 +21,5 @@ type Order ={
   name: string
   email: string
   amount: number
-  orderedAt?:string
+  orderedAt:string
 }

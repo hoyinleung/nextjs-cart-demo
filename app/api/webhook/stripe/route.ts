@@ -45,7 +45,7 @@ export async function POST(request: Request) {
           name: customerName,
           email: customerEmail,
           amount: amount_total,
-          orderedAt : new Date()
+          orderedAt: new Date().toISOString().slice(0, 19).replace('T', ' ')
         }
       );
       console.log("🚀寫入了新Order", newOrderQ)
