@@ -11,6 +11,7 @@ import {
   UserButton
 } from '@clerk/nextjs'
 import SignInDetector from "@/components/SignInDetector";
+import { currentUser } from "@clerk/nextjs/server";
 
 const notoSansHK = Noto_Sans_HK({
   subsets: ['latin'],
@@ -23,11 +24,14 @@ export const metadata: Metadata = {
   description: "Taught by Ho Yin Leung",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  
+  const user = await currentUser()
+  
   return (
     <ClerkProvider localization={zhTW}>
       <html lang="zh">
@@ -42,6 +46,10 @@ export default function RootLayout({
                 <Link href={`/sign-in`} className="text-xl font-bold">登入</Link>
               </SignedOut>
               <SignedIn>
+              {
+                  (user?.emailAddresses[0].emailAddress === "hello@leunghoyin.hk") && 
+                  (<Link href={`order-history`} className="text-xl font-bold">購買記錄</Link>)
+                }
                 <UserButton />
               </SignedIn>
             </nav>
