@@ -13,3 +13,13 @@ type TransactionProps = {
 	customerEmail?: string
   productItems: CartItems[]
 }
+
+type Order ={
+  _id: {
+    $oid: string
+  }
+  name: string
+  email: string
+  amount: number
+  orderedAt?:string
+}
